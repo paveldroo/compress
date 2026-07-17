@@ -1,4 +1,5 @@
 mod args;
+mod counter;
 mod reader;
 
 use std::error::Error;
@@ -15,7 +16,10 @@ fn main() {
 
 fn run() -> Result<(), Box<dyn Error>> {
     let path = args::parse_filepath()?;
-    let _text_data = reader::get_text_data(path)?;
+    let text_data = reader::get_text_data(path)?;
+    let chars_map = counter::get_chars_map(text_data.as_str());
+
+    dbg!(chars_map);
 
     Ok(())
 }

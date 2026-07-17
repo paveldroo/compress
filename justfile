@@ -1,6 +1,6 @@
 # Watch dev files
 run:
-    cargo run
+    cargo run -- tests/fixtures/test.txt
 
 lint:
     cargo fmt

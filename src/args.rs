@@ -7,5 +7,8 @@ pub fn parse_filepath() -> Result<String, Box<dyn Error>> {
         return Err("no filename specified".into());
     }
 
-    Ok(raw_args[1].clone())
+    raw_args.get(1).map_or_else(
+        || Err("no filename specified".into()),
+        |arg| Ok(arg.clone()),
+    )
 }

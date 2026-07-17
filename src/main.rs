@@ -1,11 +1,11 @@
-use std::error::Error;
-
 mod args;
 mod reader;
 
+use std::error::Error;
+
 fn main() {
     match run() {
-        Ok(_) => {}
+        Ok(()) => {}
         Err(err) => {
             eprintln!("compress: {err}");
             std::process::exit(1)
@@ -15,7 +15,7 @@ fn main() {
 
 fn run() -> Result<(), Box<dyn Error>> {
     let path = args::parse_filepath()?;
-    let text_data = reader::get_text_data(path)?;
+    let _text_data = reader::get_text_data(path)?;
 
     Ok(())
 }

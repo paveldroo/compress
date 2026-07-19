@@ -6,17 +6,24 @@ pub struct Stack {
 }
 
 impl Stack {
-    pub fn pop(&mut self) -> Node {
-        let node = self.values.get(0).cloned().unwrap();
-        self.values = self.values[1..].to_vec();
-        node
+    pub fn pop(&mut self) -> Option<Node> {
+        match self.values.clone().first() {
+            Some(node) => {
+                match self.values.get(1..) {
+                    Some(slice) => self.values = slice.to_vec(),
+                    None => {}
+                };
+                Some(node.clone())
+            }
+            None => None,
+        }
     }
 
     pub fn push(&mut self, node: Node) {
         self.values.extend(Vec::from([node]));
     }
 
-    pub fn len(&self) -> usize {
+    pub const fn len(&self) -> usize {
         self.values.len()
     }
 

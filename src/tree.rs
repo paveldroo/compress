@@ -6,14 +6,13 @@ use crate::stack;
 pub struct Node {
     value: Option<char>,
     pub frequency: i32,
-    right: Option<Box<Node>>,
-    left: Option<Box<Node>>,
+    right: Option<Box<Self>>,
+    left: Option<Box<Self>>,
 }
 
-pub fn get_tree(chars_map: HashMap<char, i32>) -> Node {
+pub fn get_tree(chars_map: HashMap<char, i32>) -> Option<Node> {
     let nodes = get_sorted_nodes(chars_map);
-    let tree = build_tree(nodes);
-    tree
+    build_tree(nodes)
 }
 
 fn get_sorted_nodes(chars_map: HashMap<char, i32>) -> Vec<Node> {
@@ -32,15 +31,15 @@ fn get_sorted_nodes(chars_map: HashMap<char, i32>) -> Vec<Node> {
     nodes
 }
 
-fn build_tree(sorted_nodes: Vec<Node>) -> Node {
+fn build_tree(sorted_nodes: Vec<Node>) -> Option<Node> {
     let mut stack = stack::Stack { values: vec![] };
     for node in sorted_nodes {
         stack.push(node);
     }
 
     while stack.len() > 1 {
-        let node1 = stack.pop();
-        let node2 = stack.pop();
+        let node1 = stack.pop()?;
+        let node2 = stack.pop()?;
 
         let node = Node {
             value: None,
@@ -53,9 +52,7 @@ fn build_tree(sorted_nodes: Vec<Node>) -> Node {
         stack.sort();
     }
 
-    let node = stack.pop();
-    dbg!(&node);
-    node
+    stack.pop()
 }
 
 // #[cfg(test)]

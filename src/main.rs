@@ -20,9 +20,7 @@ fn run() -> Result<(), Box<dyn Error>> {
     let path = args::parse_filepath()?;
     let text_data = reader::get_text_data(path)?;
     let chars_map = counter::get_chars_map(text_data.as_str());
-    let huffman_tree = tree::get_tree(chars_map.clone());
-
-    dbg!(chars_map);
+    let huffman_tree = tree::get_tree(chars_map);
 
     Ok(())
 }

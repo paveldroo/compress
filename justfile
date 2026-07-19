@@ -7,7 +7,7 @@ lint:
     cargo clippy -- -D warnings
 
 test:
-    cargo test
+    cargo test -- --show-output
 
 release:
     cargo build --bin compress --release

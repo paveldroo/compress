@@ -1,7 +1,6 @@
 mod args;
 mod counter;
 mod reader;
-mod stack;
 mod tree;
 
 use std::error::Error;
